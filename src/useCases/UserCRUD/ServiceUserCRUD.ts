@@ -1,6 +1,10 @@
 import {User} from '../../models/User';
+import {v4 as uuidv4} from 'uuid';
+import bcrypt from 'bcrypt';
 import IUserRepository from '../../repositories/IUserRepository';
 import UserDTO from './DTOUserCRUD';
+
+const salt = process.env.SALT || 10;
 
 export default class ServiceUserCRUD {
   private repository: IUserRepository;
@@ -13,7 +17,11 @@ export default class ServiceUserCRUD {
     if (userAlreadyExists) {
       throw new Error('User already exists');
     }
+    user.id = uuidv4();
+    const hash = await bcrypt.hashSync(user.password, salt);
 
+    user.password = hash;
+    console.log(user.password);
     await this.repository.saveUser(user);
   }
 

@@ -10,13 +10,13 @@ userRouter.post('/user', async (req, res) => (
 userRouter.get('/user', async (req, res) => (
   controlerUserCRUD.handleFindUser(req, res)));
 
-userRouter.get('/user/uuid', async (req: Request<{uuid: string}>, res) => (
+userRouter.get('/user/:uuid', async (req: Request<{uuid: string}>, res) => (
   controlerUserCRUD.handleFindUserById(req, res)));
 
-userRouter.delete('/user/uuid', async (req: Request<{uuid: string}>, res) => (
+userRouter.delete('/user/:uuid', async (req: Request<{uuid: string}>, res) => (
   controlerUserCRUD.handleDeleteUser(req, res)));
 
-userRouter.put('/user/uuid', async (req: Request<{uuid: string}>, res) => (
+userRouter.put('/user/:uuid', async (req: Request<{uuid: string}>, res) => (
   controlerUserCRUD.handleUpdateUser(req, res)));
 
 export default userRouter;

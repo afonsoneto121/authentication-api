@@ -2,7 +2,6 @@ interface UserDTO {
   id?: string,
   name: string,
   password: string,
-  email: string,
-  [other: string]: any
+  email: string
 }
 export default UserDTO;

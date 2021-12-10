@@ -1,10 +1,15 @@
 import express from 'express';
 import statusRouter from './routes/status.router';
 import userRouter from './routes/user.route';
+import logger from 'morgan';
+import cors from 'cors';
+import * as database from './db/config';
 
 const app = express();
 
-const PORT = process.env.PORT || 3333;
+const port = process.env.PORT || 3333;
+app.use(logger('dev'));
+app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -12,6 +17,6 @@ app.use(express.urlencoded({extended: true}));
 app.use(statusRouter);
 app.use(userRouter);
 
-app.listen(PORT, () => {
-  console.log(`Running in localhost:${PORT}`);
+database.run().then(() => {
+  app.listen(port, () => console.log(`API running in port ${port}`));
 });

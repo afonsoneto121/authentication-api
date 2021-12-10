@@ -1,23 +1,36 @@
-import {User} from '../../models/User';
+import {User, UserModel} from '../../models/User';
 import IUserRepository from '../IUserRepository';
 
 export default class UserMongoImp implements IUserRepository {
-  saveUser(user: User): Promise<void> {
-    throw new Error('Method not implemented.');
+  private projection: object;
+  constructor() {
+    this.projection = {
+      password: 0,
+      _id: 0,
+    };
   }
-  deleteUser(id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+
+  async saveUser(user: User): Promise<void> {
+    await UserModel.create(user);
   }
-  findAll(): Promise<User[]> {
-    throw new Error('Method not implemented.');
+
+  async deleteUser(id: string): Promise<void> {
+    await UserModel.deleteOne({id});
   }
-  findById(id: string): Promise<User | null> {
-    throw new Error('Method not implemented.');
+
+  async findAll(): Promise<User[]> {
+    return await UserModel.find({}, this.projection);
   }
-  findByEmail(email: string): Promise<User | null> {
-    throw new Error('Method not implemented.');
+
+  async findById(id: string): Promise<User | null> {
+    return await UserModel.findOne({id}, this.projection);
   }
-  updateUser(user: User, id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+
+  async findByEmail(email: string): Promise<User | null> {
+    return await UserModel.findOne({email}, this.projection);
+  }
+
+  async updateUser(user: User, id: string): Promise<void> {
+    await UserModel.findOneAndUpdate({id}, user);
   }
 }
