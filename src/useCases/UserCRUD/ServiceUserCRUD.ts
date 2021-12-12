@@ -21,7 +21,6 @@ export default class ServiceUserCRUD {
     const hash = await bcrypt.hashSync(user.password, salt);
 
     user.password = hash;
-    console.log(user.password);
     await this.repository.saveUser(user);
   }
 
