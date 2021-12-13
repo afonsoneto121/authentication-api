@@ -9,7 +9,8 @@ import JWTAuthenticationMiddleware from './middlewares/jwt-authentication.middle
 
 const app = express();
 
-const port = process.env.PORT || 3333;
+const port = parseInt(process.env.PORT || '3333');
+const hostname = process.env.HOST || '0.0.0.0';
 app.use(logger('dev'));
 app.use(cors());
 
@@ -20,6 +21,9 @@ app.use(statusRouter);
 app.use(authRoute);
 app.use(JWTAuthenticationMiddleware, userRouter);
 
-database.run().then(() => {
-  app.listen(port, () => console.log(`API running in port ${port}`));
+app.listen(port, hostname, () => {
+  console.log(`API running in port ${port}`);
+  database.run().then(() => {
+    console.log('Database connected');
+  });
 });

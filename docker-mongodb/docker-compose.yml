@@ -11,7 +11,7 @@ services:
       ME_CONFIG_MONGODB_PORT: 27017
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: root
-      ME_CONFIG_MONGODB_SERVER: authentication-api_mongo_1
+      ME_CONFIG_MONGODB_SERVER: dbmongo
       ME_CONFIG_OPTIONS_EDITORTHEME: "ambiance"
     links:
       - mongo
@@ -19,17 +19,18 @@ services:
       - mongo-compose-network
 
   mongo:
+    container_name: dbmongo
     image: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
+      MONGO_URL: mongodb://localhost:27017 
     ports:
       - "27017:27017"
     volumes:
       - ${HOME}/.volumes/authentication/MongoDB/data:/data/db
     networks:
       - mongo-compose-network
-
 networks:
   mongo-compose-network:
     driver: bridge

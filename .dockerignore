@@ -1,0 +1,6 @@
+dist/
+docker/
+node_modules/
+
+.eslintrc.json
+.gitignore
