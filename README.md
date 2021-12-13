@@ -67,6 +67,7 @@ npm run dev
 ```bash
 docker-compose -f docker-application/docker-compose.yml up -d
 ```
+\*\*  O comando acima pode requerer privilégios de administrador
 
 Para testar a aplicação abra o browser e navegue até o link  <http://localhost:3333/status>. Deverá ser mostrado na tela a seguinte mensagem com status 200
 
