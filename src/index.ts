@@ -1,11 +1,10 @@
-import express from 'express';
-import statusRouter from './routes/status.router';
-import userRouter from './routes/user.route';
-import logger from 'morgan';
 import cors from 'cors';
+import express from 'express';
+import logger from 'morgan';
 import * as database from './db/config';
 import authRoute from './routes/auth.route';
-import JWTAuthenticationMiddleware from './middlewares/jwt-authentication.middleware';
+import statusRouter from './routes/status.router';
+import userRouter from './routes/user.route';
 
 const app = express();
 
@@ -19,7 +18,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.use(statusRouter);
 app.use(authRoute);
-app.use(JWTAuthenticationMiddleware, userRouter);
+app.use(userRouter);
 
 app.listen(port, hostname, () => {
   console.log(`API running in port ${port}`);

@@ -37,6 +37,10 @@ export default class ServiceUserCRUD {
   }
 
   async updateUser(user: UserDTO, userId: string): Promise<void> {
+    const userAlreadyExists = await this.repository.findByEmail(user.email);
+    if (userAlreadyExists) {
+      throw new Error('User already exists');
+    }
     await this.repository.updateUser(user, userId);
   }
 
