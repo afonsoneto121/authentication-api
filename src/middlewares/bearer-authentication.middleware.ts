@@ -1,24 +1,24 @@
 import {Request, Response, NextFunction} from 'express';
 import {StatusCodes} from 'http-status-codes';
-
-const basicAuthenticationMiddleware = (req: Request, res: Response, next: NextFunction) => {
+import JWT from 'jsonwebtoken';
+const bearerAuthenticationMiddleware = (req: Request, res: Response, next: NextFunction) => {
   try {
     const authorization = req.headers['authorization'];
-
+    console.log(authorization);
     if (!authorization) {
       throw new Error('Resource protected, not authorized');
     }
     const [authType, token] = authorization.split(' ');
-    if (authType !== 'Basic' || !token) {
+    if (authType !== 'Bearer' || !token) {
       throw new Error('Resource protected, not authorized');
     }
-    const tokenContent = Buffer.from(token, 'base64').toString('utf-8');
+    const SECRET_KEY = process.env.SECRET_KEY || 'KEY should be stored securely';
 
-    const [email, password] = tokenContent.split(':');
-    if (!email || !password) {
+    const tokenPayload = JWT.verify(token, SECRET_KEY);
+
+    if (!tokenPayload) {
       throw new Error('Resource protected, not authorized');
     }
-    req.emailAndPassword = {email, password};
 
     next();
   } catch (err: any) {
@@ -28,4 +28,4 @@ const basicAuthenticationMiddleware = (req: Request, res: Response, next: NextFu
   }
 };
 
-export default basicAuthenticationMiddleware;
+export default bearerAuthenticationMiddleware;
