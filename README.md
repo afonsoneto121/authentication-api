@@ -4,42 +4,42 @@
 Microsserviço desenvolvido para gerenciar autenticação de usuários com NodeJS. Uma versão de teste está disponivel [aqui](https://authentication0api.herokuapp.com/status). 
 
 ## Stack 
-  - NodeJS
-  - MongoDB
-  - Docker
-  - Git
+	- NodeJS
+  	- MongoDB
+  	- Docker
+  	- Git
 
 ## Endpoints 
 Documentação gerada pelo Postman disponível [aqui](https://documenter.getpostman.com/view/16544315/UVR5sUyk).  
 
 ### Usuários
 
-  - GET /user
-  - GET /user/:uuid
-  - POST /user
-  - PUT /user/:uuid
-  - DELETE /user/:uuid
+  	- GET /user
+  	- GET /user/:uuid
+  	- POST /user
+  	- PUT /user/:uuid
+  	- DELETE /user/:uuid
 
 ### Autenticação
-  - POST /token
-  - POST /token/validate
+  	- POST /token
+  	- POST /token/validate
 
 ## Instalação 
 
 Antes de baixar e executar a aplicação é necessário certifica-se de ter instalado localmente o Git, Docker e NodeJS*. O NodeJS não é necessário na instalação via docker  
 ### Via npm
-  - Clonar o repositório
+  	- Clonar o repositório
 
 ```bash
 git clone https://github.com/afonsoneto121/authentication-api.git && cd authentication-api/
 ```
-  - Instalar as dependências 
+  	- Instalar as dependências 
 
 ```bash
 npm install
 ```
 
-  - Subir uma instância do mongo via docker compose
+  	- Subir uma instância do mongo via docker compose
 
 ```bash
 docker-compose -f docker-mongodb/docker-compose.yml up -d
@@ -47,7 +47,7 @@ docker-compose -f docker-mongodb/docker-compose.yml up -d
 
 **  O comando acima pode requerer privilégios de administrador
 
-  - Executar a aplicação usando um script de desenvolvimento
+  	- Executar a aplicação usando um script de desenvolvimento
 
 ```bash
 npm run dev
@@ -55,7 +55,7 @@ npm run dev
 
 ### Via Docker
 
-  - Subir uma instância da aplicação via docker compose
+  	- Subir uma instância da aplicação via docker compose
 
 ```bash
 docker-compose -f docker-application/docker-compose.yml up -d
