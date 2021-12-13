@@ -1,10 +1,9 @@
 import {Request, Response, NextFunction} from 'express';
 import {StatusCodes} from 'http-status-codes';
 import JWT from 'jsonwebtoken';
-const bearerAuthenticationMiddleware = (req: Request, res: Response, next: NextFunction) => {
+const JWTAuthenticationMiddleware = (req: Request, res: Response, next: NextFunction) => {
   try {
     const authorization = req.headers['authorization'];
-    console.log(authorization);
     if (!authorization) {
       throw new Error('Resource protected, not authorized');
     }
@@ -28,4 +27,4 @@ const bearerAuthenticationMiddleware = (req: Request, res: Response, next: NextF
   }
 };
 
-export default bearerAuthenticationMiddleware;
+export default JWTAuthenticationMiddleware;

@@ -1,8 +1,8 @@
 import {Request, Response} from 'express';
 import {StatusCodes} from 'http-status-codes';
+import JWT from 'jsonwebtoken';
 import {User} from '../../models/User';
 import ServiceAuth from './ServiceAuth';
-import JWT from 'jsonwebtoken';
 export default class ControllerAuth {
   constructor(private service: ServiceAuth) {}
 
@@ -34,5 +34,11 @@ export default class ControllerAuth {
     };
     const token = JWT.sign(payload, SECRET_KEY, options);
     return token;
+  }
+
+  handleValidate(req: Request, res: Response) {
+    return res.status(200).json({
+      message: 'Valid token',
+    });
   }
 }
