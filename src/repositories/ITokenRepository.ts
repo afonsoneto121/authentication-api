@@ -1,4 +1,4 @@
-import Token from '../models/Token';
+import {Token} from '../models/Token';
 
 interface ITokenRepository {
   saveToken(key: string): Promise<void>,
@@ -8,4 +8,4 @@ interface ITokenRepository {
   deleteToken(key: string): Promise<void>
 }
 
-export default ITokenRepository;
+export {ITokenRepository};

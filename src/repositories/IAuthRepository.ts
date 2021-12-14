@@ -4,4 +4,4 @@ interface IAuthRepository {
   login(email: string): Promise<User | null>
 }
 
-export default IAuthRepository;
+export {IAuthRepository};

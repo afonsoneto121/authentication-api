@@ -28,4 +28,4 @@ const basicAuthenticationMiddleware = (req: Request, res: Response, next: NextFu
   }
 };
 
-export default basicAuthenticationMiddleware;
+export {basicAuthenticationMiddleware};

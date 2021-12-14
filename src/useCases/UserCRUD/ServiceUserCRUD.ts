@@ -1,18 +1,18 @@
 import {User} from '../../models/User';
 import {v4 as uuidv4} from 'uuid';
 import bcrypt from 'bcrypt';
-import IUserRepository from '../../repositories/IUserRepository';
-import UserDTO from './DTOUserCRUD';
+import {IUserRepository} from '../../repositories/IUserRepository';
+import {UserDTO} from './DTOUserCRUD';
 
 const salt = process.env.SALT || 10;
 
-export default class ServiceUserCRUD {
+class ServiceUserCRUD {
   private repository: IUserRepository;
   constructor(repository: IUserRepository) {
     this.repository = repository;
   }
 
-  async saveUser(user: UserDTO) {
+  public async saveUser(user: UserDTO) {
     const userAlreadyExists = await this.repository.findByEmail(user.email);
     if (userAlreadyExists) {
       throw new Error('User already exists');
@@ -24,11 +24,11 @@ export default class ServiceUserCRUD {
     await this.repository.saveUser(user);
   }
 
-  async findAll(): Promise<User[]> {
+  public async findAll(): Promise<User[]> {
     return await this.repository.findAll();
   }
 
-  async findById(id : string): Promise<User | null> {
+  public async findById(id: string): Promise<User | null> {
     const result = await this.repository.findById(id);
     if (!result) {
       throw new Error('User not found');
@@ -36,7 +36,7 @@ export default class ServiceUserCRUD {
     return result;
   }
 
-  async updateUser(user: UserDTO, userId: string): Promise<void> {
+  public async updateUser(user: UserDTO, userId: string): Promise<void> {
     const userAlreadyExists = await this.repository.findByEmail(user.email);
     if (userAlreadyExists) {
       throw new Error('User already exists');
@@ -44,7 +44,8 @@ export default class ServiceUserCRUD {
     await this.repository.updateUser(user, userId);
   }
 
-  async deleteUser(id: string): Promise<void> {
+  public async deleteUser(id: string): Promise<void> {
     await this.repository.deleteUser(id);
   }
 }
+export {ServiceUserCRUD};

@@ -7,18 +7,18 @@ export interface User {
 }
 
 const schema = new Schema<User>({
+  email: {
+    required: [true, 'Email is required'],
+    type: String,
+  },
   id: String,
   name: {
-    type: String,
     required: [true, 'Name is required'],
+    type: String,
   },
   password: {
-    type: String,
     required: [true, 'Password is required'],
-  },
-  email: {
     type: String,
-    required: [true, 'Email is required'],
   },
 }, {
   versionKey: false,

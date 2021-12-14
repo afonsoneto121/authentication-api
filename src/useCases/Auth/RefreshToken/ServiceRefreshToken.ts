@@ -1,12 +1,12 @@
-import Token from '../../../models/Token';
+import {Token} from '../../../models/Token';
 import {User} from '../../../models/User';
-import ITokenRepository from '../../../repositories/ITokenRepository';
+import {ITokenRepository} from '../../../repositories/ITokenRepository';
 import {generateToken} from '../../../utils/utils';
 import JWT from 'jsonwebtoken';
-export default class ServiceRefreshToken {
+class ServiceRefreshToken {
   constructor(private repository: ITokenRepository) {}
 
-  async refreshToken(userId: string, token: string) {
+  public async refreshToken(userId: string, token: string) {
     const defaultKeyToken = `user-${userId}`;
     const tokenAlreadyExists = await this.repository.tokenExists(defaultKeyToken);
     if (!tokenAlreadyExists) {
@@ -25,8 +25,8 @@ export default class ServiceRefreshToken {
       throw new Error('Payload does not valid');
     }
     const userToken: User = {
-      id: payload.payload.sub,
       email: '',
+      id: payload.payload.sub,
       name: payload.payload['username'],
       password: '',
     };
@@ -38,3 +38,4 @@ export default class ServiceRefreshToken {
     return newToken;
   }
 }
+export {ServiceRefreshToken};

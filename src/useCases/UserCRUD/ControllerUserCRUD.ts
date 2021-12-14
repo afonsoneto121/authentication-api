@@ -1,15 +1,15 @@
 import {Request, Response} from 'express';
 import {StatusCodes} from 'http-status-codes';
 import {User} from '../../models/User';
-import ServiceUserCRUD from './ServiceUserCRUD';
+import {ServiceUserCRUD} from './ServiceUserCRUD';
 
-export default class ControllerUserCRUD {
+class ControllerUserCRUD {
   private useCase: ServiceUserCRUD;
   constructor(useCase: ServiceUserCRUD) {
     this.useCase = useCase;
   }
 
-  async handleSaveUser(req: Request, res: Response): Promise<Response> {
+  public async handleSaveUser(req: Request, res: Response): Promise<Response> {
     const user: User = req.body;
     try {
       await this.useCase.saveUser(user);
@@ -21,7 +21,7 @@ export default class ControllerUserCRUD {
     }
   }
 
-  async handleDeleteUser(req: Request, res: Response): Promise<Response> {
+  public async handleDeleteUser(req: Request, res: Response): Promise<Response> {
     const id = req.params.uuid;
     try {
       await this.useCase.deleteUser(id);
@@ -33,7 +33,7 @@ export default class ControllerUserCRUD {
     }
   }
 
-  async handleUpdateUser(req: Request, res: Response): Promise<Response> {
+  public async handleUpdateUser(req: Request, res: Response): Promise<Response> {
     const user: User = req.body;
     const id = req.params.uuid;
 
@@ -47,7 +47,7 @@ export default class ControllerUserCRUD {
     }
   }
 
-  async handleFindUser(req: Request, res: Response): Promise<Response> {
+  public async handleFindUser(req: Request, res: Response): Promise<Response> {
     const id = req.query.id as string;
     try {
       const result =
@@ -62,7 +62,7 @@ export default class ControllerUserCRUD {
     }
   }
 
-  async handleFindUserById(req: Request, res: Response): Promise<Response> {
+  public async handleFindUserById(req: Request, res: Response): Promise<Response> {
     const id = req.params.uuid;
     try {
       const result = await this.useCase.findById(id);
@@ -74,3 +74,4 @@ export default class ControllerUserCRUD {
     }
   }
 }
+export {ControllerUserCRUD};

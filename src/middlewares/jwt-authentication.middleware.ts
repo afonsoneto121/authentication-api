@@ -31,4 +31,4 @@ const JWTAuthenticationMiddleware = (req: Request, res: Response, next: NextFunc
   }
 };
 
-export default JWTAuthenticationMiddleware;
+export {JWTAuthenticationMiddleware};

@@ -1,17 +1,17 @@
 import express from 'express';
-import statusRouter from './routes/status.router';
-import userRouter from './routes/user.route';
+import {statusRouter} from './routes/status.router';
+import {userRouter} from './routes/user.route';
 import logger from 'morgan';
-import cors from 'cors';
+import * as cors from 'cors';
 import * as databaseMongo from './db/mongo.config';
-import authRoute from './routes/auth.route';
+import {authRoute} from './routes/auth.route';
 
 const app = express();
 
 const port = parseInt(process.env.PORT || '3333');
 const hostname = process.env.HOST || '0.0.0.0';
 app.use(logger('dev'));
-app.use(cors());
+app.use(cors.default());
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));

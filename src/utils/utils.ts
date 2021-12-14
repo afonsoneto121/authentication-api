@@ -7,8 +7,8 @@ export const generateToken = (user: User) => {
     username: user.name,
   };
   const options: SignOptions = {
-    subject: user.id,
     expiresIn: '15m',
+    subject: user.id,
   };
   const token = JWT.sign(payload, SECRET_KEY, options);
   return token;

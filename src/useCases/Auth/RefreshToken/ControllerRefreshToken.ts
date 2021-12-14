@@ -1,12 +1,12 @@
 import {Request, Response} from 'express';
 import {StatusCodes} from 'http-status-codes';
 import {RefreshDTO} from './RefreshDTO';
-import ServiceRefreshToken from './ServiceRefreshToken';
+import {ServiceRefreshToken} from './ServiceRefreshToken';
 
-export default class ControllerRefreshToken {
+class ControllerRefreshToken {
   constructor(private service: ServiceRefreshToken) {}
 
-  async hadleRefreshToken(req: Request, res: Response) {
+  public async hadleRefreshToken(req: Request, res: Response) {
     const refresh: RefreshDTO = req.body;
     try {
       const newToken = await this.service.refreshToken(refresh.id, refresh.token);
@@ -18,4 +18,4 @@ export default class ControllerRefreshToken {
     }
   }
 }
-
+export {ControllerRefreshToken};

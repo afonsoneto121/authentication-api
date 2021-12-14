@@ -9,4 +9,4 @@ interface IUserRepository {
   updateUser(user: User, id: string): Promise<void>;
 }
 
-export default IUserRepository;
+export {IUserRepository};

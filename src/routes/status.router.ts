@@ -1,12 +1,13 @@
 import {Router} from 'express';
+import {StatusCodes} from 'http-status-codes';
 
 // eslint-disable-next-line new-cap
 const statusRouter = Router();
 
 statusRouter.get('/status', (req, res) => {
-  res.status(200).json({
+  res.status(StatusCodes.OK).json({
     message: 'OK',
   });
 });
 
-export default statusRouter;
+export {statusRouter};

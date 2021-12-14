@@ -9,8 +9,8 @@ const pass = process.env.MONGO_PASS || 'root';
 
 const URL = process.env.MONGO_URL || `mongodb://${user}:${pass}@${host}:${port}/${db}?authSource=admin`;
 const options = {
-  autoIndex: false,
   autoCreate: true,
+  autoIndex: false,
 } as ConnectOptions;
 
 connection.on('open', () => {
