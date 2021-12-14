@@ -14,7 +14,7 @@ const options = {
 } as ConnectOptions;
 
 connection.on('open', () => {
-  console.log('Successfully connected to database');
+  console.log('Successfully connected to database MongoDB');
 });
 connection.on('error', () => {
   throw new Error('Error connecting to database');

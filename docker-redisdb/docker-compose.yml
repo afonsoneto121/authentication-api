@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  redis: 
+    image: redis
+    command: redis-server --requirepass root --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      -  ${HOME}/.volumes/authentication/MongoDB/data:/var/lib/postgresql/data

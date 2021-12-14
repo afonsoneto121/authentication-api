@@ -1,12 +1,13 @@
 import {Request, Router} from 'express';
 import controlerUserCRUD from '../useCases/UserCRUD';
-
+import JWTAuthenticationMiddleware from '../middlewares/jwt-authentication.middleware';
 // eslint-disable-next-line new-cap
 const userRouter = Router();
 
 userRouter.post('/user', async (req, res) => (
   controlerUserCRUD.handleSaveUser(req, res)));
 
+userRouter.use(JWTAuthenticationMiddleware);
 userRouter.get('/user', async (req, res) => (
   controlerUserCRUD.handleFindUser(req, res)));
 

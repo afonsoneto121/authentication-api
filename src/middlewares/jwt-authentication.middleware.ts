@@ -1,6 +1,6 @@
 import {Request, Response, NextFunction} from 'express';
 import {StatusCodes} from 'http-status-codes';
-import JWT from 'jsonwebtoken';
+import JWT, {TokenExpiredError} from 'jsonwebtoken';
 const JWTAuthenticationMiddleware = (req: Request, res: Response, next: NextFunction) => {
   try {
     const authorization = req.headers['authorization'];
@@ -9,15 +9,19 @@ const JWTAuthenticationMiddleware = (req: Request, res: Response, next: NextFunc
     }
     const [authType, token] = authorization.split(' ');
     if (authType !== 'Bearer' || !token) {
-      throw new Error('Resource protected, not authorized');
+      return res.status(StatusCodes.UNAUTHORIZED).json({
+        message: 'Token Expired',
+      });
     }
     const SECRET_KEY = process.env.SECRET_KEY || 'KEY should be stored securely';
 
-    const tokenPayload = JWT.verify(token, SECRET_KEY);
-
-    if (!tokenPayload) {
-      throw new Error('Resource protected, not authorized');
-    }
+    JWT.verify(token, SECRET_KEY, (err, data) => {
+      if (err instanceof TokenExpiredError) {
+        throw new Error('Token expired');
+      } else if (err) {
+        throw new Error('Resource protected, not authorized');
+      }
+    });
 
     next();
   } catch (err: any) {
