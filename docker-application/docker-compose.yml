@@ -30,7 +30,7 @@ services:
       - ${HOME}/.volumes/authentication/MongoDB/data:/data/db
     networks:
       - mongo-compose-network
-  redis: 
+  redis:
     image: redis
     command: redis-server --requirepass root --appendonly yes
     ports:
