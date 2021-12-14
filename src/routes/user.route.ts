@@ -1,6 +1,7 @@
 import {Request, Router} from 'express';
 import {controlerUserCRUD} from '../useCases/UserCRUD';
 import {JWTAuthenticationMiddleware} from '../middlewares/jwt-authentication.middleware';
+
 // eslint-disable-next-line new-cap
 const userRouter = Router();
 
