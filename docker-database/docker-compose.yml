@@ -24,13 +24,22 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
-      MONGO_URL: mongodb://localhost:27017 
+      MONGO_URL: mongodb://localhost:27017
     ports:
       - "27017:27017"
     volumes:
       - ${HOME}/.volumes/authentication/MongoDB/data:/data/db
     networks:
       - mongo-compose-network
+
+  redis:
+    image: redis
+    command: redis-server --requirepass root --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      -  ${HOME}/.volumes/authentication/Redis/data:/var/lib/postgresql/data
+
 networks:
   mongo-compose-network:
     driver: bridge

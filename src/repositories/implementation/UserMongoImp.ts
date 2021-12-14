@@ -1,36 +1,38 @@
 import {User, UserModel} from '../../models/User';
-import IUserRepository from '../IUserRepository';
+import {IUserRepository} from '../IUserRepository';
 
-export default class UserMongoImp implements IUserRepository {
+class UserMongoImp implements IUserRepository {
   private projection: object;
   constructor() {
     this.projection = {
-      password: 0,
       _id: 0,
+      password: 0,
     };
   }
 
-  async saveUser(user: User): Promise<void> {
+  public async saveUser(user: User): Promise<void> {
     await UserModel.create(user);
   }
 
-  async deleteUser(id: string): Promise<void> {
+  public async deleteUser(id: string): Promise<void> {
     await UserModel.deleteOne({id});
   }
 
-  async findAll(): Promise<User[]> {
+  public async findAll(): Promise<User[]> {
     return await UserModel.find({}, this.projection);
   }
 
-  async findById(id: string): Promise<User | null> {
+  public async findById(id: string): Promise<User | null> {
     return await UserModel.findOne({id}, this.projection);
   }
 
-  async findByEmail(email: string): Promise<User | null> {
+  public async findByEmail(email: string): Promise<User | null> {
     return await UserModel.findOne({email}, this.projection);
   }
 
-  async updateUser(user: User, id: string): Promise<void> {
+  public async updateUser(user: User, id: string): Promise<void> {
     await UserModel.findOneAndUpdate({id}, user);
   }
 }
+
+export {UserMongoImp};

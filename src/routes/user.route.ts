@@ -1,6 +1,6 @@
 import {Request, Router} from 'express';
-import JWTAuthenticationMiddleware from '../middlewares/jwt-authentication.middleware';
-import controlerUserCRUD from '../useCases/UserCRUD';
+import {controlerUserCRUD} from '../useCases/UserCRUD';
+import {JWTAuthenticationMiddleware} from '../middlewares/jwt-authentication.middleware';
 
 // eslint-disable-next-line new-cap
 const userRouter = Router();
@@ -21,4 +21,4 @@ userRouter.delete('/user/:uuid', async (req: Request<{uuid: string}>, res) => (
 userRouter.put('/user/:uuid', async (req: Request<{uuid: string}>, res) => (
   controlerUserCRUD.handleUpdateUser(req, res)));
 
-export default userRouter;
+export {userRouter};

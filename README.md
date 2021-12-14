@@ -46,7 +46,7 @@ git clone https://github.com/afonsoneto121/authentication-api.git && cd authenti
 npm install
 ```
 
-#### Subir uma instância do mongo via docker compose
+#### Instalar o Banco de dados via Docker
 
 ```bash
 docker-compose -f docker-mongodb/docker-compose.yml up -d
