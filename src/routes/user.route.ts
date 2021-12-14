@@ -1,4 +1,5 @@
 import {Request, Router} from 'express';
+import JWTAuthenticationMiddleware from '../middlewares/jwt-authentication.middleware';
 import controlerUserCRUD from '../useCases/UserCRUD';
 import JWTAuthenticationMiddleware from '../middlewares/jwt-authentication.middleware';
 // eslint-disable-next-line new-cap

@@ -1,7 +1,7 @@
+import cors from 'cors';
 import express from 'express';
-import statusRouter from './routes/status.router';
-import userRouter from './routes/user.route';
 import logger from 'morgan';
+
 import cors from 'cors';
 import * as databaseMongo from './db/mongo.config';
 import authRoute from './routes/auth.route';
