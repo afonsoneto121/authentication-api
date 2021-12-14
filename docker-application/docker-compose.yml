@@ -30,6 +30,14 @@ services:
       - ${HOME}/.volumes/authentication/MongoDB/data:/data/db
     networks:
       - mongo-compose-network
+  redis: 
+    image: redis
+    command: redis-server --requirepass root --appendonly yes
+    ports:
+      - "6379:6379"
+    volumes:
+      -  ${HOME}/.volumes/authentication/Redis/data:/var/lib/postgresql/data
+
   app:
     image: afonsobsneto/authentication-api
     environment:
@@ -39,6 +47,7 @@ services:
       - "3333:${PORT}"
     depends_on:
       - mongo
+      - redis
     links:
       - mongo
     networks:
